@@ -1,0 +1,86 @@
+openapi: 3.0.0
+info:
+  description: Reports API
+  version: "1.0.0"
+  title: Reports API
+  contact:
+    email: davetii@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+servers:
+  - url: http://localhost:8080/api
+    description: Local Server
+
+paths:
+  /v1/reports/person/{role}:
+    get:
+      summary: returns a list of people with a specific role
+      description: returns a list of people with a specific role
+      operationId: fetchByRole
+      parameters:
+        - $ref: "#/components/parameters/rolePathParam"
+      responses:
+        '200':
+          description: returns list of people with specific role
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Person"
+        '404':
+          description: Not Found
+components:
+  parameters:
+
+    rolePathParam:
+      in: path
+      description: role
+      name: role
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    Person:
+      type: object
+      description: Player
+      properties:
+        id:
+          type: string
+          example: abc123
+        firstName:
+          type: string
+          example: Dave
+        lastName:
+          type: string
+          example: Turner
+        role:
+          type: string
+          example: Developer
+        email:
+          type: string
+          example: davetii@gmail.com
+        addr1:
+          type: string
+          example: 123 nowhere
+        addr2:
+          type: string
+          example: po box 34
+        city:
+          type: string
+          example: harrison
+        region:
+          type: string
+          example: MI
+        country:
+          type: string
+          example: US
+        phone1:
+          type: string
+          example: 15868736131
+        phone2:
+          type: string
+          example: 15868736131

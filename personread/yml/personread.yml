@@ -1,0 +1,80 @@
+openapi: 3.0.0
+info:
+  description: Person Read API
+  version: "1.0.0"
+  title: Person Read API
+  contact:
+    email: davetii@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+paths:
+  /v1/person/{personId}:
+    get:
+      summary: returns a given person
+      description: returns a given person
+      operationId: fetchPerson
+      parameters:
+        - $ref: "#/components/parameters/personIdPathParam"
+      responses:
+        '200':
+          description: returns a given person
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
+        '404':
+          description: Not Found
+components:
+  parameters:
+
+    personIdPathParam:
+      in: path
+      description: personid
+      name: personId
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    Person:
+      type: object
+      description: Player
+      properties:
+        id:
+          type: string
+          example: abc123
+        firstName:
+          type: string
+          example: Dave
+        lastName:
+          type: string
+          example: Turner
+        role:
+          type: string
+          example: Developer
+        email:
+          type: string
+          example: davetii@gmail.com
+        addr1:
+          type: string
+          example: 123 nowhere
+        addr2:
+          type: string
+          example: po box 34
+        city:
+          type: string
+          example: harrison
+        region:
+          type: string
+          example: MI
+        country:
+          type: string
+          example: US
+        phone1:
+          type: string
+          example: 15868736131
+        phone2:
+          type: string
+          example: 15868736131
