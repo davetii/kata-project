@@ -1,10 +1,7 @@
 # Todo
 
 * Write Service
-  * API end Point
-  * Cucumber tests
-  * Implement Mongo Write DB
-  * Mongo save
+  * Publish to Kafka
 * Read Service
   * API End Point
   * Cucumber Tests

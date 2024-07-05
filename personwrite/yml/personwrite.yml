@@ -14,26 +14,48 @@ servers:
     description: Local Server
 
 paths:
-  /v1/person/:
-    put:
-      summary: Update Person
-      description: Update Person
-      operationId: updatePerson
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Person"
+  /v1/newid:
+    get:
+      summary: fetch a new ID
+      operationId: fetchNewId
       responses:
         '200':
-          description: Person Updated
+          description: new id
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: abc123
+  /v1/person/{personid}:
+    get:
+      summary: fetch Person by ID
+      operationId: fetchPerson
+      parameters:
+        - $ref: "#/components/parameters/personIdPathParam"
+      responses:
+        '200':
+          description: Found Person
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
         '404':
           description: Not Found
-    post:
-      summary: Create Person
-      description: Create
-      operationId: createPerson
+    delete:
+      summary: delete Person by ID
+      operationId: deletePerson
+      parameters:
+        - $ref: "#/components/parameters/personIdPathParam"
+      responses:
+        '204':
+          description: Person removed
+        '404':
+          description: Not Found
+  /v1/person:
+    put:
+      summary: Upsert Person
+      description: Save Person to Database
+      operationId: upsertPerson
       requestBody:
         required: true
         content:
@@ -42,8 +64,20 @@ paths:
               $ref: "#/components/schemas/Person"
       responses:
         '200':
-          description: Person Created
+          description: Person Saved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
 components:
+  parameters:
+    personIdPathParam:
+      in: path
+      description: Person ID
+      name: personid
+      required: true
+      schema:
+        type: string
   schemas:
     Person:
       type: object
