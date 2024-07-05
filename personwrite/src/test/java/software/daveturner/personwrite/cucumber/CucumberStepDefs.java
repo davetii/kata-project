@@ -37,12 +37,30 @@ public class CucumberStepDefs {
 
     protected Person person;
 
+    protected int deleteStatusCode;
+
     @Given("server is running for PersonWrite")
     public void server_is_running() {
         String rootURL =  "http://localhost:" + port;
         baseUrl = rootURL + "/api/v1/person";
         //String result = restTemplate.getForObject(rootURL + "/actuator/health" , String.class);
         //System.out.println("actuator result: " + result);
+    }
+
+    @Given("PersonWrite is running and contains data")
+    public void server_is_running2() {
+        server_is_running();
+        createPerson("abc123");
+        createPerson("abc124");
+        createPerson("abc125");
+    }
+
+    private void createPerson(String id) {
+        Person p = new Person();
+        p.setId(id);
+        p.setRole(Person.RoleEnum.DEV);
+        HttpEntity<Person> request = new HttpEntity<>(p);
+        ResponseEntity<Person> personEntity = restTemplate.exchange(baseUrl, HttpMethod.PUT, request,Person.class );
     }
 
     @When("PersonWrite put is called with {string}, {string} , {string} and {string}")
@@ -65,8 +83,34 @@ public class CucumberStepDefs {
         }
     }
 
+    @When("PersonWrite delete is called for {string}")
+    public void personwrite_delete_is_called_for(String id) {
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(baseUrl + "/" + id, HttpMethod.DELETE,null,String.class);
+            System.out.println("delete was success " + response.getStatusCode());
+        } catch (HttpClientErrorException e) {
+            System.out.println("exception occurred : " + e);
+        }
+
+        System.out.println("execute findby");
+        try {
+            ResponseEntity<Person> responseEntity  = restTemplate.getForEntity(baseUrl + "/" + id, Person.class);
+            deleteStatusCode = responseEntity.getStatusCode().value();
+        } catch (HttpClientErrorException e) {
+            deleteStatusCode = e.getStatusCode().value();
+            System.out.println("exception occurred : " + deleteStatusCode);
+        }
+    }
+
     @Then("PersonWrite api returns {string}, {string} , {string} and {string}")
     public void then_PersonWrite_api_returns_id_firstname_lastname_and_role(String id, String firstName, String lastName, String role) {
         Assertions.assertEquals(firstName, person.getFirstName() );
     }
+
+    @Then("PersonWrite findBy returns empty")
+    public void then_PersonWrite_findByReturnsEmpty() {
+        Assertions.assertEquals(deleteStatusCode, 404 );
+    }
+
+
 }
