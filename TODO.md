@@ -3,6 +3,7 @@
 * Write Service
   * Implement EmbeddedKafka into Cucumber tests
   * implement best practice approach for Kafka prod code
+  * Automate creation of Kafka message + topic creation
 * Read Service
   * API End Point
   * Cucumber Tests
@@ -37,6 +38,7 @@
 * convert to K8S
 * Convert PersonRead to SpringBoot reactive
 * expand kata to include the following tech stacks
+  * Drool rule engine
   * client service with circuit breaker
   * react front end 
   * Websocket broker
