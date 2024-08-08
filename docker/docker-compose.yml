@@ -29,4 +29,10 @@ services:
       ports:
         - "27017:27017"
 
+  kafka:
+    image: apache/kafka:3.8.0
+    container_name: kafka-test
+    restart: always
+    ports:
+      - "9092:9092"
 

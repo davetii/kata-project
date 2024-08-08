@@ -1,7 +1,8 @@
 # Todo
 
 * Write Service
-  * Publish to Kafka
+  * Implement EmbeddedKafka into Cucumber tests
+  * implement best practice approach for Kafka prod code
 * Read Service
   * API End Point
   * Cucumber Tests
