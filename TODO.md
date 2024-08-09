@@ -1,8 +1,6 @@
 # Todo
 
 * Write Service
-  * Implement EmbeddedKafka into Cucumber tests
-  * implement best practice approach for Kafka prod code
   * Automate creation of Kafka message + topic creation
 * Read Service
   * API End Point
