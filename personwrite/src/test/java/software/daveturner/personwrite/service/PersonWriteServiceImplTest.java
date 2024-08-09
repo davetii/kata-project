@@ -30,7 +30,7 @@ class PersonWriteServiceImplTest {
                 System.out.println("printing the json string arg for the mock: " + arguments[0]);
             }
             return null;
-        }).when(eventProducer).publishMessage(Mockito.anyString());
+        }).when(eventProducer).publishMessage(Mockito.any());
 
         Person p = new Person();
         p.setId("123");

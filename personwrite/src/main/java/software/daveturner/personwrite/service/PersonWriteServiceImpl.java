@@ -1,7 +1,5 @@
 package software.daveturner.personwrite.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import software.daveturner.personwrite.model.Person;
@@ -32,22 +30,14 @@ public class PersonWriteServiceImpl implements PersonWriteService {
     @Override
     public Person save(Person person) {
         Person p = mapper.personDataToPerson(repo.save(mapper.personToPersonWriteData(person)));
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonString;
-        try {
-            jsonString = objectMapper.writeValueAsString(person);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-        if (jsonString != null) {
-            eventPublisher.publishMessage(jsonString);
-        }
+        eventPublisher.publishMessage(utils.createWriteEvent(person));
         return p;
     }
 
     @Override
     public void delete(String id) {
         repo.deleteById(id);
+        eventPublisher.publishMessage(utils.createDeleteEvent(id));
     }
 
     @Override
