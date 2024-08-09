@@ -18,8 +18,6 @@ public class PersonWriteServiceImpl implements PersonWriteService {
     private final PersonWriteUtils utils;
     private final EventProducer eventPublisher;
 
-
-
     public PersonWriteServiceImpl(PersonWriteRepo repo, PersonMapper mapper, EventProducer eventPublisher) {
         this.repo = repo;
         this.mapper = mapper;
