@@ -8,7 +8,10 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-
+servers:
+  - url: http://localhost:8081/api
+    description: Local Server
+    
 paths:
   /v1/person/{personId}:
     get:

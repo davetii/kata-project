@@ -10,12 +10,7 @@ import java.util.Optional;
 public class Mapper {
 
     public Optional<Person> personDataToPerson(Optional<PersonData> pw) {
-        if (pw.isEmpty()) {
-                System.out.println("he was emppty");
-                return Optional.empty(); }
-
-        System.out.println("he was NMOT emppty");
-        System.out.println(pw.get());
+        if (pw.isEmpty()) { return Optional.empty(); }
         Person p = new Person();
         p.setId(pw.get().getId());
         p.setFirstName(pw.get().getFirstName());

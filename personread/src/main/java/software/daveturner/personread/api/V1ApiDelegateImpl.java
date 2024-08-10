@@ -17,13 +17,10 @@ public class V1ApiDelegateImpl implements  V1ApiDelegate {
 
     public V1ApiDelegateImpl(PersonReadService service) {
         this.service = service;
-        log.info("DTurner V1ApiDelegateImpl is constructred");
-
-
     }
+
     @Override
     public ResponseEntity<Person> fetchPerson(String personId) {
-        log.info("DTurner Fetching person: " + personId);
         Optional<Person> p = service.findById(personId);
         return p.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
