@@ -7,11 +7,8 @@ import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,8 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import software.daveturner.personwrite.model.Person;
-import software.daveturner.personwrite.service.EventProducer;
-
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration
@@ -43,25 +38,11 @@ public class CucumberStepDefs {
 
     protected int deleteStatusCode;
 
-    @MockBean
-    EventProducer eventProducer;
-
-    private void setupMock() {
-        Mockito.doAnswer((Answer<Void>) invocation -> {
-            System.out.println("printing answer to see the mock working");
-            Object[] arguments = invocation.getArguments();
-            if (arguments != null && arguments.length > 0 && arguments[0] != null) {
-                System.out.println("printing the json string arg for the mock: " + arguments[0]);
-            }
-            return null;
-        }).when(eventProducer).publishMessage(Mockito.any());
-    }
 
     @Given("server is running for PersonWrite")
     public void server_is_running() {
         String rootURL =  "http://localhost:" + port;
         baseUrl = rootURL + "/api/v1/person";
-        setupMock();
     }
 
     @Given("PersonWrite is running and contains data")
