@@ -1,8 +1,5 @@
 # Todo
 
-* Write Service
-  * introduce embedded mongo db instance into tests
-  * Automate creation of Kafka message + topic creation
 * Read Service
   * API End Point
   * Cucumber Tests
