@@ -130,7 +130,7 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
-					<!--
+					
                     <execution>
                         <id>Stop Containers</id>
                         <phase>verify</phase>
@@ -142,7 +142,7 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
-                    -->
+                    
                 </executions>
             </plugin>
 
