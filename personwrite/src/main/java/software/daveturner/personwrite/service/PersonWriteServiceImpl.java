@@ -3,7 +3,7 @@ package software.daveturner.personwrite.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import software.daveturner.personwrite.model.Person;
-import software.daveturner.personwrite.model.PersonWriteData;
+import software.daveturner.katamodel.data.PersonData;
 import software.daveturner.personwrite.repo.PersonWriteRepo;
 import software.daveturner.personwrite.util.PersonWriteUtils;
 
@@ -40,7 +40,7 @@ public class PersonWriteServiceImpl implements PersonWriteService {
 
     @Override
     public Optional<Person> findById(String id) {
-        Optional<PersonWriteData> pwd = repo.findById(id);
+        Optional<PersonData> pwd = repo.findById(id);
         return pwd.map(mapper::personDataToPerson);
     }
 

@@ -1,4 +1,4 @@
-package software.daveturner.kataeventlib;
+package software.daveturner.katamodel.events;
 
 public class KataEvent {
     protected String eventType;

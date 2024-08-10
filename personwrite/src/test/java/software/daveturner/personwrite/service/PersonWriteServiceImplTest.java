@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import software.daveturner.personwrite.model.Person;
-import software.daveturner.personwrite.model.PersonWriteData;
+import software.daveturner.katamodel.data.PersonData;
 import software.daveturner.personwrite.repo.PersonWriteRepo;
 
 import java.util.Optional;
@@ -27,7 +27,7 @@ class PersonWriteServiceImplTest {
     @MockBean
     PersonWriteRepo repo;
 
-    PersonWriteData personWriteDataMock = buildPersonWrite();
+    PersonData personWriteDataMock = buildPersonWrite();
 
     @BeforeEach
     public void setup() {
@@ -44,7 +44,7 @@ class PersonWriteServiceImplTest {
 
     @Test
     public void ensureFindByIdReturnsExpected() {
-        Optional<PersonWriteData> mockedPwd = Optional.of(personWriteDataMock);
+        Optional<PersonData> mockedPwd = Optional.of(personWriteDataMock);
         Mockito.doReturn(mockedPwd).when(repo).findById(Mockito.anyString());
 
         Optional<Person> person = service.findById("123");
@@ -100,8 +100,8 @@ class PersonWriteServiceImplTest {
 
     }
 
-    private PersonWriteData buildPersonWrite() {
-        PersonWriteData mock = new PersonWriteData();
+    private PersonData buildPersonWrite() {
+        PersonData mock = new PersonData();
         mock.setId("123");
         mock.setFirstName("Joe");
         mock.setLastName("Blow");

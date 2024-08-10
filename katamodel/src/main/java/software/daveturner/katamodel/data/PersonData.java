@@ -1,12 +1,13 @@
-package software.daveturner.personwrite.model;
+package software.daveturner.katamodel.data;
+
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document("PersonWrite")
-public class PersonWriteData {
+@Document("person")
+public class PersonData {
 
     @Id
     private String id;
@@ -21,4 +22,5 @@ public class PersonWriteData {
     private String country;
     private String phone1;
     private String phone2;
+
 }

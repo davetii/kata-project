@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import software.daveturner.kataeventlib.KataEvent;
+import software.daveturner.katamodel.events.KataEvent;
 import java.util.concurrent.CompletableFuture;
 
 

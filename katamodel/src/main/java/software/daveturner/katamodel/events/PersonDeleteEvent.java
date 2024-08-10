@@ -1,4 +1,4 @@
-package software.daveturner.kataeventlib;
+package software.daveturner.katamodel.events;
 
 public class PersonDeleteEvent extends KataEvent {
     public PersonDeleteEvent(String body) {

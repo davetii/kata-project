@@ -2,13 +2,13 @@ package software.daveturner.personwrite.service;
 
 import org.springframework.stereotype.Component;
 import software.daveturner.personwrite.model.Person;
-import software.daveturner.personwrite.model.PersonWriteData;
+import software.daveturner.katamodel.data.PersonData;
 
 @Component
 public class PersonMapper {
 
-    public PersonWriteData personToPersonWriteData(Person person) {
-        PersonWriteData pw = new PersonWriteData();
+    public PersonData personToPersonWriteData(Person person) {
+        PersonData pw = new PersonData();
         pw.setId(person.getId());
         pw.setFirstName(person.getFirstName());
         pw.setLastName(person.getLastName());
@@ -24,7 +24,7 @@ public class PersonMapper {
         return pw;
     }
 
-    public Person personDataToPerson(PersonWriteData pw) {
+    public Person personDataToPerson(PersonData pw) {
         Person p = new Person();
         p.setId(pw.getId());
         p.setFirstName(pw.getFirstName());

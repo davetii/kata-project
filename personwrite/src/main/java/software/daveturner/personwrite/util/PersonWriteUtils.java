@@ -3,9 +3,9 @@ package software.daveturner.personwrite.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
-import software.daveturner.kataeventlib.KataEvent;
-import software.daveturner.kataeventlib.PersonDeleteEvent;
-import software.daveturner.kataeventlib.PersonWriteEvent;
+import software.daveturner.katamodel.events.KataEvent;
+import software.daveturner.katamodel.events.PersonDeleteEvent;
+import software.daveturner.katamodel.events.PersonWriteEvent;
 import software.daveturner.personwrite.model.Person;
 import java.util.Random;
 

@@ -85,7 +85,7 @@
     </build>
 
     <modules>
-        <module>kataeventlib</module>
+        <module>katamodel</module>
         <module>personwrite</module>
         <module>reportconsumer</module>
         <module>readconsumer</module>
