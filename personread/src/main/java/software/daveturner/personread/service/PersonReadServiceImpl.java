@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class PersonReadServiceImpl implements  PersonReadService {
+public class PersonReadServiceImpl implements PersonReadService {
 
     private final PersonReadRepo repo;
 

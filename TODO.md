@@ -1,16 +1,16 @@
 # Todo
 
 * Read Service
-  * API End Point
   * Cucumber Tests
-  * Create Mongo Read DB
-  * Read Mongo Data
+  * Create Mongo ReadONly DB
+  * Read Mongo Data from seperate readonly DB
 * Report Service
   * API end point, h2 + cucumber tests
   * runtime with postgres liquibase
   * implement DB versioning with liquibase
 * Ensure Each Service has unique runtime port
   * Ensure works within intellij
+* Refactor PersonData in Katamodel (probably not needed)
 * Create Kafka Broker
 * publish PersonWrite
 * Create ReportKafkaConsumer

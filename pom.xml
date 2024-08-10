@@ -16,7 +16,7 @@
     <properties>
         <java.version>22</java.version>
         <cucumber.version>7.18.0</cucumber.version>
-        <app.version>0.0.1</app.version>
+        <app.version>0.0.3</app.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -31,11 +31,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
