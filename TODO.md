@@ -2,18 +2,16 @@
 
 * Create PersonReadKafkaConsumer
   * populates mongo tables
+* Create Redis Service
+* PersonRead Redis Implementation
+* Refactor PersonData in Katamodel (probably not needed)
+* Change PersonReadKafkaConsumer to write to redis
 * Report Service
   * API end point, h2 + cucumber tests
   * runtime with postgres liquibase
   * implement DB versioning with liquibase
-* Ensure Each Service has unique runtime port
-  * Ensure works within intellij
-* Refactor PersonData in Katamodel (probably not needed)
-* Create Kafka Broker
 * Create ReportKafkaConsumer
   * Populates postgres tables
-* Create Redis Service
-* Change PersonReadKafkaConsumer to write to redis
 * Change PersonRead to check redis first BEFORE going to Mongo read
 * Create docker image for PersonWrite
   * maven install
@@ -35,5 +33,4 @@
   * Websocket broker
   * rabbitmq
   * Pulsar
-  * 
 	
