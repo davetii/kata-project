@@ -1,9 +1,7 @@
 # Todo
 
-* Read Service
-  * Cucumber Tests
-  * Create Mongo ReadONly DB
-  * Read Mongo Data from seperate readonly DB
+* Create PersonReadKafkaConsumer
+  * populates mongo tables
 * Report Service
   * API end point, h2 + cucumber tests
   * runtime with postgres liquibase
@@ -12,11 +10,8 @@
   * Ensure works within intellij
 * Refactor PersonData in Katamodel (probably not needed)
 * Create Kafka Broker
-* publish PersonWrite
 * Create ReportKafkaConsumer
   * Populates postgres tables
-* Create PersonReadKafkaConsumer
-  * populates mongo tables
 * Create Redis Service
 * Change PersonReadKafkaConsumer to write to redis
 * Change PersonRead to check redis first BEFORE going to Mongo read
