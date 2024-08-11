@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  description: Read Consumer Objects
+  version: "1.0.0"
+  title: Read Consumer Objects
+  contact:
+    email: davetii@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+components:
+  schemas:
+    Person:
+      type: object
+      description: Person
+      properties:
+        id:
+          type: string
+          example: abc123
+        firstName:
+          type: string
+          example: Dave
+        lastName:
+          type: string
+          example: Turner
+        role:
+          type: string
+          example: DEV
+        email:
+          type: string
+          example: davetii@gmail.com
+        addr1:
+          type: string
+          example: 123 nowhere
+        addr2:
+          type: string
+          example: po box 34
+        city:
+          type: string
+          example: harrison
+        region:
+          type: string
+          example: MI
+        country:
+          type: string
+          example: US
+        phone1:
+          type: string
+          example: 15868736131
+        phone2:
+          type: string
+          example: 15868736131

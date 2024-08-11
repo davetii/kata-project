@@ -7,10 +7,9 @@
 		<artifactId>kata-project</artifactId>
 		<version>0.1.0</version>
 	</parent>
-
-	<groupId>software.daveturner</groupId>
 	<artifactId>katamodel</artifactId>
 	<name>katamodel</name>
+	<version>0.0.1-SNAPSHOT</version>
 	<description>base Classes for Java Kata Project</description>
 	<packaging>jar</packaging>
 	<properties>

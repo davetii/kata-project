@@ -7,7 +7,6 @@
 		<artifactId>kata-project</artifactId>
 		<version>0.1.0</version>
 	</parent>
-	<groupId>software.daveturner</groupId>
 	<artifactId>readconsumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>readconsumer</name>
@@ -19,7 +18,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
@@ -30,5 +29,63 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.8</version>
+		</dependency>
+		<dependency>
+			<groupId>software.daveturner</groupId>
+			<artifactId>katamodel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>6.5.0</version>
+				<executions>
+					<execution>
+						<id>generate-server-stub</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/yml/readconsumer.yml
+							</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>software.daveturner.readconsumer.api</apiPackage>
+							<modelPackage>software.daveturner.readconsumer.model</modelPackage>
+							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+							<generateApis>false</generateApis>
+							<skipValidateSpec>true</skipValidateSpec>
+
+							<configOptions>
+								<delegatePattern>true</delegatePattern>
+								<useSpringBoot3>true</useSpringBoot3>
+								<useSwaggerUI>false</useSwaggerUI>
+
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

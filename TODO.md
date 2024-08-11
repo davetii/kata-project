@@ -1,7 +1,5 @@
 # Todo
 
-* Create PersonReadKafkaConsumer
-  * populates mongo tables
 * Create Redis Service
 * PersonRead Redis Implementation
 * Refactor PersonData in Katamodel (probably not needed)

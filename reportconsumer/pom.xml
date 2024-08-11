@@ -7,9 +7,8 @@
 		<artifactId>kata-project</artifactId>
 		<version>0.1.0</version>
 	</parent>
-	<groupId>software.daveturner</groupId>
 	<artifactId>reportconsumer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>	
 	<name>reportconsumer</name>
 	<description>Demo project for Spring Boot</description>
 	<dependencies>

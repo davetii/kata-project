@@ -37,13 +37,17 @@ public class PersonWriteUtils {
         String jsonString;
         try {
             jsonString = objectMapper.writeValueAsString(person);
-            return new PersonWriteEvent(jsonString);
+            KataEvent event = new PersonWriteEvent();
+            event.setBody(jsonString);
+            return event;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
 
     public KataEvent createDeleteEvent(String id) {
-        return new PersonDeleteEvent(id);
+        KataEvent event = new PersonDeleteEvent();
+        event.setBody(id);
+        return event;
     }
 }

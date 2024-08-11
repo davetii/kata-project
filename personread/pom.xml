@@ -7,10 +7,9 @@
 		<artifactId>kata-project</artifactId>
 		<version>0.1.0</version>
 	</parent>
-
-	<groupId>software.daveturner</groupId>
 	<artifactId>personread</artifactId>
 	<name>personread</name>
+	<version>0.0.1-SNAPSHOT</version>
 	<description>Demo project for Spring Boot</description>
 	<dependencies>
 		<dependency>
