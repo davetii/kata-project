@@ -1,18 +1,15 @@
 package software.daveturner.personread.service;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import software.daveturner.personread.model.Person;
 import software.daveturner.personread.repo.PersonReadRepo;
-
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class PersonReadServiceImplTest {
@@ -33,6 +30,8 @@ class PersonReadServiceImplTest {
 
         Optional<Person> value = service.findById("123");
         assertTrue(value.isPresent());
-        Assertions.assertEquals(value.get().getId(), person.getId());
+        assertEquals(value.get().getId(), person.getId());
+
+        verify(repo, times(1)).findById(anyString());
     }
 }

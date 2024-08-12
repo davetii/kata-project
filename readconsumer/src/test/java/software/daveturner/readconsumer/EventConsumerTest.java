@@ -7,10 +7,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import software.daveturner.katamodel.events.KataEvent;
+import software.daveturner.katamodel.events.PersonDeleteEvent;
 import software.daveturner.katamodel.events.PersonWriteEvent;
 import software.daveturner.readconsumer.model.Person;
 
@@ -100,6 +102,45 @@ class EventConsumerTest {
         eventConsumer.delete("123");
 
         verify(repo, times(0)).save(any());
+        verify(redis, times(0)).set(any(), any());
+        verify(repo, times(1)).deleteById(anyString());
+        verify(redis, times(1)).del(anyString());
+    }
+
+    @Test
+    public void ensureListenExecutesAsExpectedWhenSaveIsRun() {
+
+        Person person = new Person();
+        person.setId("123");
+        person.setFirstName("CustomerFirstName");
+        person.setLastName("CustomerLastName");
+
+        eventConsumer.listen(eventAsJsonString);
+        when(repo.save(any())).thenReturn(person);
+        doNothing().when(redis).set(any(), any());
+
+
+        verify(repo, times(1)).save(person);
+        verify(redis, times(1)).set(any(), any());
+        verify(repo, times(0)).deleteById(anyString());
+        verify(redis, times(0)).del(anyString());
+
+    }
+
+    @Test
+    public void ensureListenExecutesAsExpectedWheDeleteIsRun() throws JsonProcessingException {
+
+        PersonDeleteEvent e = new PersonDeleteEvent();
+        e.setBody("123");
+        ObjectMapper mapper = new ObjectMapper();
+        String deleteEventJson = mapper.writeValueAsString(e);
+        doNothing().when(repo).deleteById(any());
+        doNothing().when(redis).del(any());
+
+        eventConsumer.listen(deleteEventJson);
+
+
+        verify(repo, times(0)).save(Mockito.any());
         verify(redis, times(0)).set(any(), any());
         verify(repo, times(1)).deleteById(anyString());
         verify(redis, times(1)).del(anyString());
