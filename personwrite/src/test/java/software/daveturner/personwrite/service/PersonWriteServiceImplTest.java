@@ -14,6 +14,9 @@ import software.daveturner.personwrite.repo.PersonWriteRepo;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 
 @SpringBootTest
@@ -39,7 +42,7 @@ class PersonWriteServiceImplTest {
                 System.out.println("printing the json string arg for the mock: " + arguments[0]);
             }
             return null;
-        }).when(eventProducer).publishMessage(Mockito.any());
+        }).when(eventProducer).publishMessage(any());
     }
 
     @Test
@@ -49,6 +52,7 @@ class PersonWriteServiceImplTest {
 
         Optional<Person> person = service.findById("123");
         assertTrue(person.isPresent());
+        verify(repo, times(1)).findById("123");
     }
 
 
@@ -63,12 +67,16 @@ class PersonWriteServiceImplTest {
                 System.out.println("args: " + arguments[0]);
             }
             return null;
-        }).when(repo).deleteById(Mockito.any());
+        }).when(repo).deleteById(any());
         Mockito.doReturn(Optional.empty()).when(repo).findById(Mockito.anyString());
 
         service.delete("123");
         Optional<Person> person = service.findById("123");
         assertTrue(person.isEmpty());
+
+        verify(repo, times(1)).deleteById(any());
+        verify(eventProducer, times(1)).publishMessage(any());
+
     }
 
     @Test
@@ -86,9 +94,9 @@ class PersonWriteServiceImplTest {
                 System.out.println("repo: " + arguments[0]);
             }
             return null;
-        }).when(repo).save(Mockito.any());
+        }).when(repo).save(any());
 
-        Mockito.doReturn(personWriteDataMock).when(repo).save(Mockito.any());
+        Mockito.doReturn(personWriteDataMock).when(repo).save(any());
 
         Person p = new Person();
         p.setId("123");
@@ -98,6 +106,8 @@ class PersonWriteServiceImplTest {
 
         service.save(p);
 
+        verify(repo , times(1)).save(any());
+        verify(eventProducer , times(1)).publishMessage(any());
     }
 
     private PersonData buildPersonWrite() {
