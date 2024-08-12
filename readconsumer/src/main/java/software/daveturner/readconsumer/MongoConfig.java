@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 
 @Configuration
-public class SpringMongoConfig {
+public class MongoConfig {
 
     @Autowired
     private MappingMongoConverter mappingMongoConverter;

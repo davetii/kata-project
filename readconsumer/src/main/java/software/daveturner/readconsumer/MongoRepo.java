@@ -5,5 +5,5 @@ import org.springframework.stereotype.Component;
 import software.daveturner.readconsumer.model.Person;
 
 @Component
-public interface DbWriterRepo extends MongoRepository<Person, String> {
+public interface MongoRepo extends MongoRepository<Person, String> {
 }
