@@ -1,6 +1,5 @@
 # Todo
 
-* PersonRead Redis Implementation
 * Refactor PersonData in Katamodel (probably not needed)
 * Revisit OpenAPI setup, try to centralize schema objects
 * Report Service
