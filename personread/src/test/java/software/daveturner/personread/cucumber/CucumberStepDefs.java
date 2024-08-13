@@ -1,20 +1,28 @@
 package software.daveturner.personread.cucumber;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import software.daveturner.personread.model.Person;
+import software.daveturner.personread.service.RedisService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,11 +33,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @Ignore
 public class CucumberStepDefs {
 
+    private static final Logger log = LoggerFactory.getLogger(CucumberStepDefs.class);
     @Autowired
     RestTemplate restTemplate;
 
     @LocalServerPort
     protected int port = 8081;
+
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
+
+    @MockBean
+    RedisService redisService;
 
     protected int httpStatus;
 
@@ -60,6 +75,16 @@ public class CucumberStepDefs {
         p.setRole("DEV");
         HttpEntity<Person> request = new HttpEntity<>(p);
         ResponseEntity<Person> personEntity = restTemplate.exchange(baseUrl, HttpMethod.PUT, request,Person.class );
+        ObjectWriter ow = new ObjectMapper().writer();
+        try {
+            String json = ow.writeValueAsString(p);
+            redisTemplate.opsForValue().set(id, json);
+        } catch (JsonProcessingException e) {
+            //throw new RuntimeException(e);
+            log.error("Error converting to json");
+        }
+
+
     }
 
     @When("PersonRead is called with {string}")

@@ -12,13 +12,17 @@ import java.util.Optional;
 public class PersonReadServiceImpl implements PersonReadService {
 
     private final PersonReadRepo repo;
+    private final RedisService redisService;
 
-    public PersonReadServiceImpl(PersonReadRepo repo) {
+    public PersonReadServiceImpl(PersonReadRepo repo, RedisService redisService) {
         this.repo = repo;
+        this.redisService = redisService;
     }
 
     @Override
     public Optional<Person> findById(String id) {
+        Optional<Person> p = redisService.getPerson(id);
+        if (p.isPresent()) { return p; }
         return repo.findById(id);
     }
 }

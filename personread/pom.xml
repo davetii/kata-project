@@ -75,6 +75,10 @@
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
     </dependencies>
 
 	<build>
@@ -160,6 +164,8 @@
 						<exclude>**/V1ApiDelegate.*</exclude>
 						<exclude>**/V1Api.*</exclude>
 						<exclude>**/PersonReadRepo.*</exclude>
+						<exclude>**/RedisConfig.*</exclude>
+						<exclude>**/RedisService.*</exclude>
 						<exclude>software/daveturner/personread/model/*.*</exclude>
 						<exclude>**/PersonreadApplication.*</exclude>
 					</excludes>

@@ -10,4 +10,10 @@ services:
         MONGO_INITDB_DATABASE: "personread-verify"
       volumes:
         - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  redis:
+    image: redis:latest
+    container_name: redis-verify
+    restart: always
+    ports:
+      - "6379:6379"
 

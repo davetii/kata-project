@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.6] - 2024-08-xx
+- Redis Phase 2
+	Added Redis lookup to Personread
+	
 
 ## [0.0.5] - 2024-08-11
 - Redis Phase 1
