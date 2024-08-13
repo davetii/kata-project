@@ -2,7 +2,6 @@ package software.daveturner.personread.api;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -14,6 +13,8 @@ import software.daveturner.personread.service.PersonReadService;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 
 @SpringBootTest
 class V1ApiDelegateImplTest {
@@ -30,7 +31,7 @@ class V1ApiDelegateImplTest {
         person.setId("123");
 
         Optional<Person> mockedData = Optional.of(person);
-        Mockito.doReturn(mockedData).when(service).findById(Mockito.anyString());
+        doReturn(mockedData).when(service).findById(anyString());
 
         ResponseEntity<Person> value = api.fetchPerson("123");
         assertTrue(value.hasBody());

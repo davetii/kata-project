@@ -14,5 +14,4 @@ public class ConfigForCucumberStepDefs {
         return new RestTemplate();
     }
 
-
 }
