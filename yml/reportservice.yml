@@ -29,7 +29,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Person"
+                  $ref: "person.yml#/components/schemas/Person"
         '404':
           description: Not Found
 components:
@@ -42,45 +42,3 @@ components:
       required: true
       schema:
         type: string
-
-  schemas:
-    Person:
-      type: object
-      description: Player
-      properties:
-        id:
-          type: string
-          example: abc123
-        firstName:
-          type: string
-          example: Dave
-        lastName:
-          type: string
-          example: Turner
-        role:
-          type: string
-          example: Developer
-        email:
-          type: string
-          example: davetii@gmail.com
-        addr1:
-          type: string
-          example: 123 nowhere
-        addr2:
-          type: string
-          example: po box 34
-        city:
-          type: string
-          example: harrison
-        region:
-          type: string
-          example: MI
-        country:
-          type: string
-          example: US
-        phone1:
-          type: string
-          example: 15868736131
-        phone2:
-          type: string
-          example: 15868736131

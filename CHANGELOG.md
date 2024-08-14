@@ -12,7 +12,6 @@ All notable changes to this project will be documented in this file.
 - Redis Phase 2
 	Added Redis lookup to Personread
 	
-
 ## [0.0.5] - 2024-08-11
 - Redis Phase 1
 	Added Redis docker support
