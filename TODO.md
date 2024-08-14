@@ -1,22 +1,13 @@
 # Todo
 
 * Report Service
-  * API end point, h2 + cucumber tests
-  * runtime with postgres liquibase
-  * implement DB versioning with liquibase
+  * Create report schema
+  * API
+  * liquibase setup
+  * h2 + cucumber tests
 * Create ReportKafkaConsumer
   * Populates postgres tables
-* Change PersonRead to check redis first BEFORE going to Mongo read
-* Create docker image for PersonWrite
-  * maven install
-* Create docker image for PersonRead
-  * maven install
-* Create docker image for ReportService
-  * maven install   
-* Create docker image for ReportConsumer
-  * maven install
-* Create docker image for PersonReadConsumer
-  * maven install 
+* Create Test Suite
 * generate docker-compose for kata project
 * convert to K8S
 * Convert PersonRead to SpringBoot reactive

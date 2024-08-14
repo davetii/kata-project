@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.0.7] - 2024-08-12
+## [0.0.8] - 2024-08-13
+- Adding docker image creation step to all maven projects
+
+## [0.0.7] - 2024-08-13
 - centralizing openapi schemas
  
 ## [0.0.6] - 2024-08-12
