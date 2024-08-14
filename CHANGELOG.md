@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.10] - 2024-08-14
+- Handling 404's better
+- Improving Cucumber tests
+
 ## [0.0.9] - 2024-08-14
 - Adding validation to PersonWrite API
 

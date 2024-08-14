@@ -9,4 +9,4 @@ Feature: Testing Kata Project PersonWrite API
       | abc123  | Bob       | Johnson     | DEV     |
       | abc124  | Nancy     | Johnson     | MGR     |
       | abc125  | Andy      | Johnson     | BA      |
-      | abc126  | Jose      | Johnson     | TESTER  |
+      | abc126  | Jose      | Johnson     | QA      |

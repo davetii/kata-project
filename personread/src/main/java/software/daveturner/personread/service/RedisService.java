@@ -18,7 +18,9 @@ public class RedisService {
     }
 
     public Optional<Person> getPerson(String key)  {
+        if(key == null) { return Optional.empty(); }
         String json = redisTemplate.opsForValue().get(key);
+        if(json == null) { return Optional.empty(); }
         ObjectMapper mapper = new ObjectMapper();
         try {
             return Optional.of(mapper.readValue(json, Person.class));

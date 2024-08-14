@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.Ignore;
-import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,13 +15,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import software.daveturner.model.Person;
+import software.daveturner.model.PersonWriteRequest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.DEFINED_PORT)
 @Ignore
-public class CucumberStepDefs {
+public class CucumberStepDefsTest {
 
     @Autowired
     RestTemplate restTemplate;
@@ -54,27 +56,25 @@ public class CucumberStepDefs {
     }
 
     private void createPerson(String id) {
-        Person p = new Person();
+        PersonWriteRequest p = new PersonWriteRequest();
         p.setId(id);
-        p.setRole("DEV");
-        HttpEntity<Person> request = new HttpEntity<>(p);
-        ResponseEntity<Person> personEntity = restTemplate.exchange(baseUrl, HttpMethod.PUT, request,Person.class );
+        p.setRole(PersonWriteRequest.RoleEnum.DEV);
+        HttpEntity<PersonWriteRequest> request = new HttpEntity<>(p);
+        restTemplate.exchange(baseUrl, HttpMethod.PUT, request,Person.class );
     }
 
     @When("PersonWrite put is called with {string}, {string} , {string} and {string}")
     public void personwwrite_put_is_called_with(String id, String firstName, String lastName, String role) {
         try {
-            Person p = new Person();
-            p.setRole("DEV");
+            PersonWriteRequest p = new PersonWriteRequest();
+            p.setRole(PersonWriteRequest.RoleEnum.fromValue(role));
             p.setFirstName(firstName);
             p.setLastName(lastName);
             p.setId(id);
-            HttpEntity<Person> request = new HttpEntity<>(p);
+            HttpEntity<PersonWriteRequest> request = new HttpEntity<>(p);
             ResponseEntity<Person> personEntity = restTemplate.exchange(baseUrl, HttpMethod.PUT, request,Person.class );
             person = personEntity.getBody();
             httpStatus = personEntity.getStatusCode().value();
-
-            System.out.println("http stays : " + httpStatus);
         } catch (HttpClientErrorException e) {
             httpStatus = e.getStatusCode().value();
             System.out.println("exception occurred : " );
@@ -84,8 +84,7 @@ public class CucumberStepDefs {
     @When("PersonWrite delete is called for {string}")
     public void personwrite_delete_is_called_for(String id) {
         try {
-            ResponseEntity<String> response = restTemplate.exchange(baseUrl + "/" + id, HttpMethod.DELETE,null,String.class);
-            System.out.println("delete was success " + response.getStatusCode());
+            restTemplate.exchange(baseUrl + "/" + id, HttpMethod.DELETE,null,String.class);
         } catch (HttpClientErrorException e) {
             System.out.println("exception occurred : " + e);
         }
@@ -102,12 +101,15 @@ public class CucumberStepDefs {
 
     @Then("PersonWrite api returns {string}, {string} , {string} and {string}")
     public void then_PersonWrite_api_returns_id_firstname_lastname_and_role(String id, String firstName, String lastName, String role) {
-        Assertions.assertEquals(firstName, person.getFirstName() );
+        assertEquals(firstName, person.getFirstName() );
+        assertEquals(id, person.getId());
+        assertEquals(lastName, person.getLastName());
+        assertEquals(role, person.getRole());
     }
 
     @Then("PersonWrite findBy returns empty")
     public void then_PersonWrite_findByReturnsEmpty() {
-        Assertions.assertEquals(deleteStatusCode, 404 );
+        assertEquals(deleteStatusCode, 404 );
     }
 
 
