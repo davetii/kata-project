@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import software.daveturner.personread.model.Person;
+import software.daveturner.model.Person;
 import software.daveturner.personread.repo.PersonReadRepo;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;

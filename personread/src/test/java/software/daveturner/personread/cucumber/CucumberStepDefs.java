@@ -21,7 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import software.daveturner.personread.model.Person;
+import software.daveturner.model.Person;
 import software.daveturner.personread.service.RedisService;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import software.daveturner.personread.model.Person;
+import software.daveturner.model.Person;
 import software.daveturner.personread.service.PersonReadService;
 
 import java.util.Optional;

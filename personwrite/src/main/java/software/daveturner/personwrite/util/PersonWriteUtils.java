@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import software.daveturner.katamodel.events.KataEvent;
 import software.daveturner.katamodel.events.PersonDeleteEvent;
 import software.daveturner.katamodel.events.PersonWriteEvent;
-import software.daveturner.personwrite.model.Person;
+import software.daveturner.model.Person;
 import java.util.Random;
 
 @Component

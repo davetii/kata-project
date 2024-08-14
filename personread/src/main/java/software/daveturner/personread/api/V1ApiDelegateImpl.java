@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import software.daveturner.personread.model.Person;
+import software.daveturner.model.Person;
 import software.daveturner.personread.service.PersonReadService;
 
 import java.util.Optional;
@@ -12,7 +12,6 @@ import java.util.Optional;
 @RestController
 public class V1ApiDelegateImpl implements  V1ApiDelegate {
 
-    private static final Logger log = LoggerFactory.getLogger(V1ApiDelegateImpl.class);
     private final PersonReadService service;
 
     public V1ApiDelegateImpl(PersonReadService service) {

@@ -2,8 +2,7 @@ package software.daveturner.personwrite.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import software.daveturner.personwrite.model.Person;
-import software.daveturner.katamodel.data.PersonData;
+import software.daveturner.model.Person;
 import software.daveturner.personwrite.repo.PersonWriteRepo;
 import software.daveturner.personwrite.util.PersonWriteUtils;
 
@@ -14,22 +13,20 @@ import java.util.Optional;
 public class PersonWriteServiceImpl implements PersonWriteService {
 
     private final PersonWriteRepo repo;
-    private final PersonMapper mapper;
     private final PersonWriteUtils utils;
     private final EventProducer eventPublisher;
 
-    public PersonWriteServiceImpl(PersonWriteRepo repo, PersonMapper mapper, EventProducer eventPublisher) {
+    public PersonWriteServiceImpl(PersonWriteRepo repo, EventProducer eventPublisher) {
         this.repo = repo;
-        this.mapper = mapper;
         this.eventPublisher = eventPublisher;
         this.utils = new PersonWriteUtils();
     }
 
     @Override
     public Person save(Person person) {
-        Person p = mapper.personDataToPerson(repo.save(mapper.personToPersonWriteData(person)));
+        repo.save(person);
         eventPublisher.publishMessage(utils.createWriteEvent(person));
-        return p;
+        return person;
     }
 
     @Override
@@ -40,8 +37,7 @@ public class PersonWriteServiceImpl implements PersonWriteService {
 
     @Override
     public Optional<Person> findById(String id) {
-        Optional<PersonData> pwd = repo.findById(id);
-        return pwd.map(mapper::personDataToPerson);
+        return repo.findById(id);
     }
 
     @Override

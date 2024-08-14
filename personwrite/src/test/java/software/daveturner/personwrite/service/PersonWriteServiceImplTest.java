@@ -7,8 +7,7 @@ import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import software.daveturner.personwrite.model.Person;
-import software.daveturner.katamodel.data.PersonData;
+import software.daveturner.model.Person;
 import software.daveturner.personwrite.repo.PersonWriteRepo;
 
 import java.util.Optional;
@@ -30,8 +29,6 @@ class PersonWriteServiceImplTest {
     @MockBean
     PersonWriteRepo repo;
 
-    PersonData personWriteDataMock = buildPersonWrite();
-
     @BeforeEach
     public void setup() {
 
@@ -47,8 +44,12 @@ class PersonWriteServiceImplTest {
 
     @Test
     public void ensureFindByIdReturnsExpected() {
-        Optional<PersonData> mockedPwd = Optional.of(personWriteDataMock);
-        Mockito.doReturn(mockedPwd).when(repo).findById(Mockito.anyString());
+        Person p = new Person();
+        p.setId("123");
+        p.setFirstName("Joe");
+        p.setLastName("Blow");
+        p.setRole("DEV");
+        Mockito.doReturn(Optional.of(p)).when(repo).findById(Mockito.anyString());
 
         Optional<Person> person = service.findById("123");
         assertTrue(person.isPresent());
@@ -87,6 +88,12 @@ class PersonWriteServiceImplTest {
     @Test
     public void ensureSaveExecutionPathReturnsExpected() {
 
+        Person p = new Person();
+        p.setId("123");
+        p.setFirstName("Joe");
+        p.setLastName("Blow");
+        p.setRole("DEV");
+
         Mockito.doAnswer((Answer<Void>) invocation -> {
             System.out.println("saving item to repo");
             Object[] arguments = invocation.getArguments();
@@ -96,29 +103,12 @@ class PersonWriteServiceImplTest {
             return null;
         }).when(repo).save(any());
 
-        Mockito.doReturn(personWriteDataMock).when(repo).save(any());
-
-        Person p = new Person();
-        p.setId("123");
-        p.setFirstName("Joe");
-        p.setLastName("Blow");
-        p.setRole(Person.RoleEnum.DEV);
-
+        Mockito.doReturn(p).when(repo).save(any());
         service.save(p);
 
         verify(repo , times(1)).save(any());
         verify(eventProducer , times(1)).publishMessage(any());
     }
-
-    private PersonData buildPersonWrite() {
-        PersonData mock = new PersonData();
-        mock.setId("123");
-        mock.setFirstName("Joe");
-        mock.setLastName("Blow");
-        mock.setRole("DEV");
-        return mock;
-    }
-
 
 
 }

@@ -1,6 +1,6 @@
 package software.daveturner.personwrite.service;
 
-import software.daveturner.personwrite.model.Person;
+import software.daveturner.model.Person;
 
 import java.util.Optional;
 

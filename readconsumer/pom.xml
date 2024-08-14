@@ -75,26 +75,25 @@
 						</goals>
 						<configuration>
 							<inputSpec>
-								${project.basedir}/yml/readconsumer.yml
+								${maven.multiModuleProjectDirectory}/yml/person.yml
 							</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>software.daveturner.readconsumer.api</apiPackage>
-							<modelPackage>software.daveturner.readconsumer.model</modelPackage>
+							<modelPackage>software.daveturner.model</modelPackage>
 							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
 							<generateApis>false</generateApis>
 							<skipValidateSpec>true</skipValidateSpec>
-
 							<configOptions>
 								<delegatePattern>true</delegatePattern>
 								<useSpringBoot3>true</useSpringBoot3>
 								<useSwaggerUI>false</useSwaggerUI>
-
 							</configOptions>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
+			<!--
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -148,6 +147,7 @@
 					</execution>
 				</executions>
 			</plugin>
+		-->
 		</plugins>
 	</build>
 

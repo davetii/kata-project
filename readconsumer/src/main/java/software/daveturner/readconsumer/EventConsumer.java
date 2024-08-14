@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import software.daveturner.katamodel.events.KataEvent;
-import software.daveturner.readconsumer.model.Person;
+import software.daveturner.model.Person;
 
 import java.util.Optional;
 

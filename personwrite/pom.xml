@@ -96,11 +96,11 @@
 						</goals>
 						<configuration>
 							<inputSpec>
-								${project.basedir}/yml/personwrite.yml
+								${maven.multiModuleProjectDirectory}/yml/personwrite.yml
 							</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>software.daveturner.personwrite.api</apiPackage>
-							<modelPackage>software.daveturner.personwrite.model</modelPackage>
+							<modelPackage>software.daveturner.model</modelPackage>
 							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
 							<configOptions>
 								<delegatePattern>true</delegatePattern>
@@ -154,6 +154,7 @@
 				</configuration>
 			</plugin>
 
+			<!--
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -203,6 +204,7 @@
 					</execution>
 				</executions>
 			</plugin>
+		-->
 
 
 		</plugins>

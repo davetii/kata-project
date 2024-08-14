@@ -14,7 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import software.daveturner.katamodel.events.KataEvent;
 import software.daveturner.katamodel.events.PersonDeleteEvent;
 import software.daveturner.katamodel.events.PersonWriteEvent;
-import software.daveturner.readconsumer.model.Person;
+import software.daveturner.model.Person;
 
 import java.util.Optional;
 

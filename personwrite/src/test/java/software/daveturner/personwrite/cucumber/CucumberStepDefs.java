@@ -15,7 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import software.daveturner.personwrite.model.Person;
+import software.daveturner.model.Person;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration
@@ -56,7 +56,7 @@ public class CucumberStepDefs {
     private void createPerson(String id) {
         Person p = new Person();
         p.setId(id);
-        p.setRole(Person.RoleEnum.DEV);
+        p.setRole("DEV");
         HttpEntity<Person> request = new HttpEntity<>(p);
         ResponseEntity<Person> personEntity = restTemplate.exchange(baseUrl, HttpMethod.PUT, request,Person.class );
     }
@@ -65,7 +65,7 @@ public class CucumberStepDefs {
     public void personwwrite_put_is_called_with(String id, String firstName, String lastName, String role) {
         try {
             Person p = new Person();
-            p.setRole(Person.RoleEnum.valueOf(role));
+            p.setRole("DEV");
             p.setFirstName(firstName);
             p.setLastName(lastName);
             p.setId(id);

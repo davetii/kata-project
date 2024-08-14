@@ -2,7 +2,7 @@ package software.daveturner.personread.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import software.daveturner.personread.model.Person;
+import software.daveturner.model.Person;
 import software.daveturner.personread.repo.PersonReadRepo;
 
 import java.util.Optional;

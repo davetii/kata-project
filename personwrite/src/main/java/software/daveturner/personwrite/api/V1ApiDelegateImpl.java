@@ -2,7 +2,7 @@ package software.daveturner.personwrite.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import software.daveturner.personwrite.model.Person;
+import software.daveturner.model.Person;
 import software.daveturner.personwrite.service.PersonWriteService;
 
 import java.util.Optional;

@@ -95,11 +95,11 @@
 						</goals>
 						<configuration>
 							<inputSpec>
-								${project.basedir}/yml/personread.yml
+								${maven.multiModuleProjectDirectory}/yml/personread.yml
 							</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>software.daveturner.personread.api</apiPackage>
-							<modelPackage>software.daveturner.personread.model</modelPackage>
+							<modelPackage>software.daveturner.model</modelPackage>
 							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
 							<configOptions>
 								<delegatePattern>true</delegatePattern>
@@ -153,6 +153,7 @@
 				</configuration>
 			</plugin>
 
+			<!--
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -205,6 +206,7 @@
 					</execution>
 				</executions>
 			</plugin>
+		-->
 
 		</plugins>
 	</build>

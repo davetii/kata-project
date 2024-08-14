@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import software.daveturner.katamodel.events.KataEvent;
-import software.daveturner.personwrite.model.Person;
+import software.daveturner.model.Person;
 
 import static org.apache.commons.lang3.StringUtils.*;
 
@@ -36,7 +36,7 @@ class PersonWriteUtilsTest {
         p.setId("123");
         p.setFirstName("Joe");
         p.setLastName("Blow");
-        p.setRole(Person.RoleEnum.DEV);
+        p.setRole("DEV");
 
         KataEvent e = utils.createWriteEvent(p);
         Assertions.assertEquals("PersonWriteEvent", e.getEventType());
@@ -45,6 +45,6 @@ class PersonWriteUtilsTest {
         Assertions.assertEquals("123", p2.getId());
         Assertions.assertEquals("Joe", p2.getFirstName());
         Assertions.assertEquals("Blow", p2.getLastName());
-        Assertions.assertEquals(Person.RoleEnum.DEV, p2.getRole());
+        Assertions.assertEquals("DEV", p2.getRole());
     }
 }
