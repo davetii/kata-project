@@ -3,8 +3,8 @@ package software.daveturner.personwrite.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import software.daveturner.model.Person;
+import software.daveturner.model.PersonWriteRequest;
 import software.daveturner.personwrite.repo.PersonWriteRepo;
-import software.daveturner.personwrite.util.PersonWriteUtils;
 
 import java.util.Optional;
 
@@ -13,18 +13,18 @@ import java.util.Optional;
 public class PersonWriteServiceImpl implements PersonWriteService {
 
     private final PersonWriteRepo repo;
-    private final PersonWriteUtils utils;
+    private final PersonWriteHelper utils;
     private final EventProducer eventPublisher;
 
-    public PersonWriteServiceImpl(PersonWriteRepo repo, EventProducer eventPublisher) {
+    public PersonWriteServiceImpl(PersonWriteRepo repo, PersonWriteHelper utils, EventProducer eventPublisher) {
         this.repo = repo;
+        this.utils = utils;
         this.eventPublisher = eventPublisher;
-        this.utils = new PersonWriteUtils();
     }
 
     @Override
-    public Person save(Person person) {
-        repo.save(person);
+    public Person save(PersonWriteRequest in) {
+        Person person = repo.save(utils.writeRequestToPerson(in));
         eventPublisher.publishMessage(utils.createWriteEvent(person));
         return person;
     }

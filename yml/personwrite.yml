@@ -7,7 +7,7 @@ info:
     email: davetii@gmail.com
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 servers:
   - url: http://localhost:8080/api
     description: Local Server
@@ -59,7 +59,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "person.yml#/components/schemas/Person"
+              $ref: "#/components/schemas/PersonWriteRequest"
       responses:
         '200':
           description: Person Saved
@@ -68,6 +68,7 @@ paths:
               schema:
                 $ref: "person.yml#/components/schemas/Person"
 components:
+
   parameters:
     personIdPathParam:
       in: path
@@ -76,3 +77,54 @@ components:
       required: true
       schema:
         type: string
+  
+  schemas:
+    PersonWriteRequest:
+      type: object
+      required: [id, firstName, lastName, role, email]
+      description: PersonWriteRequest
+     
+      properties:
+        id:
+          type: string
+          example: abc123
+        firstName:
+          type: string
+          example: Dave
+        lastName:
+          type: string
+          example: Turner
+        org:
+          type: string
+          example: DJUG
+        role:
+          type: string
+          enum: [DEV, QA, MGR, OPS, BA, DBA]
+        locale:
+          type: string
+          enum: [en-US, en-CA, fr-CA, es-MX, es-US]
+          default: en-US
+        email:
+          type: string
+          example: davetii@gmail.com
+        addr1:
+          type: string
+          example: 123 nowhere
+        addr2:
+          type: string
+          example: po box 34
+        city:
+          type: string
+          example: harrison
+        region:
+          type: string
+          example: MI
+        country:
+          type: string
+          example: US
+        phone1:
+          type: string
+          example: 15868736131
+        phone2:
+          type: string
+          example: 15868736131

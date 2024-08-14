@@ -3,6 +3,7 @@ package software.daveturner.personwrite.api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import software.daveturner.model.Person;
+import software.daveturner.model.PersonWriteRequest;
 import software.daveturner.personwrite.service.PersonWriteService;
 
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class V1ApiDelegateImpl implements V1ApiDelegate{
     }
 
     @Override
-    public ResponseEntity<Person> upsertPerson(Person person) {
+    public ResponseEntity<Person> upsertPerson(PersonWriteRequest person) {
         return ResponseEntity.ok(service.save(person));
     }
 }

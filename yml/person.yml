@@ -23,9 +23,15 @@ components:
         lastName:
           type: string
           example: Turner
+        org:
+          type: string
+          example: myOrg
         role:
           type: string
           example: DEV
+        locale:
+          type: string
+          example: en-US
         email:
           type: string
           example: davetii@gmail.com

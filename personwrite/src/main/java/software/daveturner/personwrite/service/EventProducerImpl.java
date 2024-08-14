@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
@@ -20,9 +19,11 @@ public class EventProducerImpl implements EventProducer {
 
     private static final Logger logger = LoggerFactory.getLogger(EventProducerImpl.class);
 
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
-    @Autowired
-    KafkaTemplate<String, String> kafkaTemplate;
+    public EventProducerImpl(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
     public void publishMessage(KataEvent event) {
         ObjectMapper objectMapper = new ObjectMapper();

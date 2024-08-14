@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.9] - 2024-08-14
+- Adding validation to PersonWrite API
+
 ## [0.0.8] - 2024-08-13
 - Adding docker image creation step to all maven projects
 

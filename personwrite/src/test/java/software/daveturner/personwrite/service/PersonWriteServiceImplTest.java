@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import software.daveturner.model.Person;
+import software.daveturner.model.PersonWriteRequest;
 import software.daveturner.personwrite.repo.PersonWriteRepo;
 
 import java.util.Optional;
@@ -56,8 +57,6 @@ class PersonWriteServiceImplTest {
         verify(repo, times(1)).findById("123");
     }
 
-
-
     @Test
     public void ensureDeleteReturnsExpected() {
 
@@ -88,6 +87,15 @@ class PersonWriteServiceImplTest {
     @Test
     public void ensureSaveExecutionPathReturnsExpected() {
 
+        PersonWriteRequest pwr = new PersonWriteRequest();
+        pwr.setId("123");
+        pwr.setFirstName("Joe");
+        pwr.setLastName("Blow");
+        pwr.setRole(PersonWriteRequest.RoleEnum.DEV);
+        pwr.setEmail("joe@example.com");
+        pwr.setLocale(PersonWriteRequest.LocaleEnum.EN_US);
+
+
         Person p = new Person();
         p.setId("123");
         p.setFirstName("Joe");
@@ -104,11 +112,9 @@ class PersonWriteServiceImplTest {
         }).when(repo).save(any());
 
         Mockito.doReturn(p).when(repo).save(any());
-        service.save(p);
+        service.save(pwr);
 
         verify(repo , times(1)).save(any());
         verify(eventProducer , times(1)).publishMessage(any());
     }
-
-
 }

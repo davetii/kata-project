@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import software.daveturner.katamodel.events.KataEvent;
 import software.daveturner.model.Person;
+import software.daveturner.personwrite.service.PersonWriteHelper;
 
 import static org.apache.commons.lang3.StringUtils.*;
 
 class PersonWriteUtilsTest {
 
-    PersonWriteUtils utils  = new PersonWriteUtils();
+    PersonWriteHelper utils  = new PersonWriteHelper();
 
     @Test
     void ensureThreeRandomLettersAreAlwaysAlpha() {
