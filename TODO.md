@@ -1,7 +1,5 @@
 # Todo
 
-* Refactor PersonData in Katamodel (probably not needed)
-* Revisit OpenAPI setup, try to centralize schema objects
 * Report Service
   * API end point, h2 + cucumber tests
   * runtime with postgres liquibase
