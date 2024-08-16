@@ -81,7 +81,7 @@ components:
   schemas:
     PersonWriteRequest:
       type: object
-      required: [id, firstName, lastName, role, email]
+      required: [id, firstName, lastName, role, email, org, hiredate, level]
       description: PersonWriteRequest
      
       properties:
@@ -96,14 +96,20 @@ components:
           example: Turner
         org:
           type: string
-          example: DJUG
+          enum: [SALES, SERVICE, MARKETING, HR, ENGINEERING, BUSINESS, IT, OPERATIONS]
         role:
           type: string
-          enum: [DEV, QA, MGR, OPS, BA, DBA]
+          enum: [DEV, QA, MGR, OPS, ANALYST, DBA, CSR]
         locale:
           type: string
           enum: [en-US, en-CA, fr-CA, es-MX, es-US]
           default: en-US
+        level:
+          type: integer
+          default: 1
+        hireDate:
+          type: string
+          format: date
         email:
           type: string
           example: davetii@gmail.com

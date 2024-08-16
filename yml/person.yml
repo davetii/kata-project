@@ -32,6 +32,12 @@ components:
         locale:
           type: string
           example: en-US
+        level:
+          type: integer
+          default: 0
+        hireDate:
+          type: string
+          format: date
         email:
           type: string
           example: davetii@gmail.com

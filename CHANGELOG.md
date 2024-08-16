@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## [0.0.11] - 2024-08-15
+- Adding more org, level, hireDate to API
+
 ## [0.0.10] - 2024-08-14
 - Handling 404's better
 - Improving Cucumber tests

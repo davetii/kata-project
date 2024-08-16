@@ -11,6 +11,7 @@ import software.daveturner.model.Person;
 import software.daveturner.model.PersonWriteRequest;
 import software.daveturner.personwrite.repo.PersonWriteRepo;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -94,6 +95,8 @@ class PersonWriteServiceImplTest {
         pwr.setRole(PersonWriteRequest.RoleEnum.DEV);
         pwr.setEmail("joe@example.com");
         pwr.setLocale(PersonWriteRequest.LocaleEnum.EN_US);
+        pwr.setOrg(PersonWriteRequest.OrgEnum.IT);
+        pwr.setHireDate(LocalDate.parse("2020-10-01"));
 
 
         Person p = new Person();

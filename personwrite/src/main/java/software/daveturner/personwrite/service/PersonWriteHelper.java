@@ -2,6 +2,8 @@ package software.daveturner.personwrite.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.stereotype.Component;
 import software.daveturner.katamodel.events.KataEvent;
 import software.daveturner.katamodel.events.PersonDeleteEvent;
@@ -35,10 +37,12 @@ public class PersonWriteHelper {
 
 
     public KataEvent createWriteEvent(Person person) {
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         String jsonString;
         try {
-            jsonString = objectMapper.writeValueAsString(person);
+            jsonString = mapper.writeValueAsString(person);
             KataEvent event = new PersonWriteEvent();
             event.setBody(jsonString);
             return event;
@@ -68,6 +72,10 @@ public class PersonWriteHelper {
         person.setRegion(in.getRegion());
         person.setRole(in.getRole().getValue());
         person.setLocale(in.getLocale().getValue());
+        person.setLevel(in.getLevel());
+        person.setOrg(in.getOrg().getValue());
+        person.setHireDate(in.getHireDate());
+        person.setLevel(in.getLevel());
         return person;
     }
 }

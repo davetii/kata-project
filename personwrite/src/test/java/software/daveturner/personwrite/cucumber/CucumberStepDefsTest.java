@@ -6,6 +6,8 @@ import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -17,6 +19,8 @@ import org.springframework.web.client.RestTemplate;
 import software.daveturner.model.Person;
 import software.daveturner.model.PersonWriteRequest;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -26,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Ignore
 public class CucumberStepDefsTest {
 
+    private static final Logger log = LoggerFactory.getLogger(CucumberStepDefsTest.class);
     @Autowired
     RestTemplate restTemplate;
 
@@ -59,26 +64,9 @@ public class CucumberStepDefsTest {
         PersonWriteRequest p = new PersonWriteRequest();
         p.setId(id);
         p.setRole(PersonWriteRequest.RoleEnum.DEV);
+        p.setOrg(PersonWriteRequest.OrgEnum.HR);
         HttpEntity<PersonWriteRequest> request = new HttpEntity<>(p);
         restTemplate.exchange(baseUrl, HttpMethod.PUT, request,Person.class );
-    }
-
-    @When("PersonWrite put is called with {string}, {string} , {string} and {string}")
-    public void personwwrite_put_is_called_with(String id, String firstName, String lastName, String role) {
-        try {
-            PersonWriteRequest p = new PersonWriteRequest();
-            p.setRole(PersonWriteRequest.RoleEnum.fromValue(role));
-            p.setFirstName(firstName);
-            p.setLastName(lastName);
-            p.setId(id);
-            HttpEntity<PersonWriteRequest> request = new HttpEntity<>(p);
-            ResponseEntity<Person> personEntity = restTemplate.exchange(baseUrl, HttpMethod.PUT, request,Person.class );
-            person = personEntity.getBody();
-            httpStatus = personEntity.getStatusCode().value();
-        } catch (HttpClientErrorException e) {
-            httpStatus = e.getStatusCode().value();
-            System.out.println("exception occurred : " );
-        }
     }
 
     @When("PersonWrite delete is called for {string}")
@@ -86,7 +74,8 @@ public class CucumberStepDefsTest {
         try {
             restTemplate.exchange(baseUrl + "/" + id, HttpMethod.DELETE,null,String.class);
         } catch (HttpClientErrorException e) {
-            System.out.println("exception occurred : " + e);
+            log.error("exception occurred in PersonWrite delete");
+            log.error(e.toString());
         }
 
         System.out.println("execute findby");
@@ -95,16 +84,9 @@ public class CucumberStepDefsTest {
             deleteStatusCode = responseEntity.getStatusCode().value();
         } catch (HttpClientErrorException e) {
             deleteStatusCode = e.getStatusCode().value();
-            System.out.println("exception occurred : " + deleteStatusCode);
+            log.error("exception occurred in PersonWrite delete while calling getForEntity");
+            log.error(e.toString());
         }
-    }
-
-    @Then("PersonWrite api returns {string}, {string} , {string} and {string}")
-    public void then_PersonWrite_api_returns_id_firstname_lastname_and_role(String id, String firstName, String lastName, String role) {
-        assertEquals(firstName, person.getFirstName() );
-        assertEquals(id, person.getId());
-        assertEquals(lastName, person.getLastName());
-        assertEquals(role, person.getRole());
     }
 
     @Then("PersonWrite findBy returns empty")
@@ -113,4 +95,34 @@ public class CucumberStepDefsTest {
     }
 
 
+    @When("PersonWrite put is called with {string}, {string}, {string}, {string}, {string} and {string}")
+    public void personwritePutIsCalledWithAnd(String id, String firstName, String lastName, String role, String org, String hireDate) {
+        try {
+            PersonWriteRequest p = new PersonWriteRequest();
+            p.setRole(PersonWriteRequest.RoleEnum.fromValue(role));
+            p.setFirstName(firstName);
+            p.setLastName(lastName);
+            p.setId(id);
+            p.setOrg(PersonWriteRequest.OrgEnum.fromValue(org));
+            p.setHireDate(LocalDate.parse(hireDate));
+            HttpEntity<PersonWriteRequest> request = new HttpEntity<>(p);
+            ResponseEntity<Person> personEntity = restTemplate.exchange(baseUrl, HttpMethod.PUT, request,Person.class );
+            person = personEntity.getBody();
+            httpStatus = personEntity.getStatusCode().value();
+        } catch (HttpClientErrorException e) {
+            httpStatus = e.getStatusCode().value();
+            System.out.println("exception occurred : " );
+        }
+        
+    }
+
+    @Then("PersonWrite api returns {string}, {string}, {string}, {string}, {string} and {string}")
+    public void personwriteApiReturnsAnd(String id, String firstName, String lastName, String role, String org, String hireDate) {
+        assertEquals(firstName, person.getFirstName() );
+        assertEquals(id, person.getId());
+        assertEquals(lastName, person.getLastName());
+        assertEquals(role, person.getRole());
+        assertEquals(org, person.getOrg());
+        assertEquals(LocalDate.parse(hireDate), person.getHireDate());
+    }
 }
