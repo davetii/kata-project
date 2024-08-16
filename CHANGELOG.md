@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.12] - 2024-08-16
+- reworking API generation so that modules can be built independently
 
 ## [0.0.11] - 2024-08-15
 - Adding more org, level, hireDate to API

@@ -90,9 +90,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>
-								${maven.multiModuleProjectDirectory}/yml/personwrite.yml
-							</inputSpec>
+							<inputSpec>${project.basedir}/../yml/personwrite.yml</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>software.daveturner.personwrite.api</apiPackage>
 							<modelPackage>software.daveturner.model</modelPackage>

@@ -6,6 +6,7 @@
 		<groupId>software.daveturner</groupId>
 		<artifactId>kata-project</artifactId>
 		<version>0.1.0</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>personread</artifactId>
@@ -97,7 +98,7 @@
 						</goals>
 						<configuration>
 							<inputSpec>
-								${maven.multiModuleProjectDirectory}/yml/personread.yml
+								${project.basedir}/../yml/personread.yml
 							</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>software.daveturner.personread.api</apiPackage>

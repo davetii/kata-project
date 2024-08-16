@@ -76,9 +76,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>
-								${maven.multiModuleProjectDirectory}/yml/person.yml
-							</inputSpec>
+							<inputSpec>${project.basedir}/../yml/person.yml</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>software.daveturner.readconsumer.api</apiPackage>
 							<modelPackage>software.daveturner.model</modelPackage>
