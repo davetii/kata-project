@@ -14,6 +14,22 @@ servers:
     description: Local Server
 
 paths:
+  /v1/reports/person/{id}:
+    get:
+      summary: returns a person by looking up the ID
+      description: returns a person
+      operationId: fetchById
+      parameters:
+        - $ref: "#/components/parameters/idPathParam"
+      responses:
+        '200':
+          description: returns list of people with specific role
+          content:
+            application/json:
+              schema:
+                $ref: "person.yml#/components/schemas/Person"
+        '404':
+          description: Not Found
   /v1/reports/person/{role}:
     get:
       summary: returns a list of people with a specific role
@@ -89,6 +105,14 @@ paths:
           description: Not Found
 components:
   parameters:
+
+    idPathParam:
+      in: path
+      description: id
+      name: id
+      required: true
+      schema:
+        type: string
 
     rolePathParam:
       in: path
