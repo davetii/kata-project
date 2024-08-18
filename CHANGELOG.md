@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.13] - 2024-08-17
+- begin work on report service 
+
 ## [0.0.12] - 2024-08-16
 - reworking API generation so that modules can be built independently
 

@@ -1,10 +1,10 @@
 # Todo
 
 * Report Service
-  * Create report schema
-  * API
-  * liquibase setup
-  * h2 + cucumber tests
+  * Complete prodoction code and tests under h2
+  * implement postgress in prod
+  * implement hist tables postgress
+  * cucumber tests
 * Create ReportKafkaConsumer
   * Populates postgres tables
 * Create Test Suite

@@ -10,7 +10,7 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 
 servers:
-  - url: http://localhost:8080/api
+  - url: http://localhost:8084/api
     description: Local Server
 
 paths:
@@ -32,6 +32,61 @@ paths:
                   $ref: "person.yml#/components/schemas/Person"
         '404':
           description: Not Found
+  /v1/reports/person/{level}:
+    get:
+      summary: returns a list of people with a specific level
+      description: returns a list of people with a specific level
+      operationId: fetchByLevel
+      parameters:
+        - $ref: "#/components/parameters/levelPathParam"
+      responses:
+        '200':
+          description: returns list of people with specific level
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "person.yml#/components/schemas/Person"
+        '404':
+          description: Not Found
+  /v1/reports/person/{orgid}:
+    get:
+      summary: returns a list of people within a specific org
+      description: returns a list of people within a specific org
+      operationId: fetchByOrg
+      parameters:
+        - $ref: "#/components/parameters/orgPathParam"
+      responses:
+        '200':
+          description: returns list of people with specific level
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/org"
+        '404':
+          description: Not Found
+
+  /v1/reports/person/{locale}:
+    get:
+      summary: returns a list of people within a specific locale
+      description: returns a list of people within a specific locale
+      operationId: fetchByLocale
+      parameters:
+         - $ref: "#/components/parameters/localePathParam"
+      responses:
+        '200':
+          description: returns list of people with specific locale
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "person.yml#/components/schemas/Person"
+        '404':
+          description: Not Found
 components:
   parameters:
 
@@ -42,3 +97,42 @@ components:
       required: true
       schema:
         type: string
+
+    levelPathParam:
+      in: path
+      description: level
+      name: level
+      required: true
+      schema:
+        type: string
+
+    orgPathParam:
+      in: path
+      description: orgid
+      name: orgid
+      required: true
+      schema:
+        type: string
+
+    localePathParam:
+      in: path
+      description: locale
+      name: locale
+      required: true
+      schema:
+        type: string
+
+
+  schemas:
+    org:
+      type: object
+      description: Org
+      properties:
+        leaders:
+          type: array
+          items:
+            $ref: "person.yml#/components/schemas/Person"
+        members:
+          type: array
+          items:
+            $ref: "person.yml#/components/schemas/Person"
