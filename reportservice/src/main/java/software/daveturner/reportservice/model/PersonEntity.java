@@ -1,4 +1,4 @@
-package software.daveturner.reportservice.service;
+package software.daveturner.reportservice.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

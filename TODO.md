@@ -1,12 +1,11 @@
 # Todo
 
 * Report Service
-  * Complete prodoction code and tests under h2
   * implement postgress in prod
-  * implement hist tables postgress
   * cucumber tests
 * Create ReportKafkaConsumer
   * Populates postgres tables
+  * implement hist tables postgress
 * Create Test Suite
 * generate docker-compose for kata project
 * convert to K8S

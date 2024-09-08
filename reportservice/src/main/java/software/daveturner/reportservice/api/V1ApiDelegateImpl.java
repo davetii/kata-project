@@ -33,12 +33,8 @@ public class V1ApiDelegateImpl implements V1ApiDelegate {
     }
 
     @Override
-    public ResponseEntity<List<Org>> fetchByOrg(String orgid) {
-        List<Org> list = service.fetchByOrg(orgid);
-        if (list.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(list);
+    public ResponseEntity<List<Person>> fetchByOrg(String orgid) {
+        return getListResponseEntity(service.fetchByOrg(orgid));
     }
 
     @Override

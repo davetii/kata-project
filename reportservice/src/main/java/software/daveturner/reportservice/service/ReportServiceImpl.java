@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import software.daveturner.model.Org;
 import software.daveturner.model.Person;
+import software.daveturner.reportservice.model.OrgEntity;
+import software.daveturner.reportservice.repo.OrgRepo;
+import software.daveturner.reportservice.repo.PersonRepo;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,36 +15,57 @@ import java.util.Optional;
 @Transactional
 public class ReportServiceImpl implements ReportService{
 
-    private final ReportRepo repo;
+    private final PersonRepo personRepo;
     private final PersonMapper mapper;
+    private final OrgRepo orgRepo;
 
-    public ReportServiceImpl(ReportRepo repo, PersonMapper mapper) {
-        this.repo = repo;
+    public ReportServiceImpl(PersonRepo repo, PersonMapper mapper, OrgRepo orgRepo) {
+        this.personRepo = repo;
         this.mapper = mapper;
+        this.orgRepo = orgRepo;
     }
 
     @Override
     public List<Person> fetchByLevel(String level) {
-        return List.of();
+        return mapper.mapList(personRepo.findPersonByLevel(Integer.parseInt(level)));
     }
 
     @Override
     public List<Person> fetchByLocale(String locale) {
-        return List.of();
+        return mapper.mapList(personRepo.findPersonByLocale(locale));
     }
 
     @Override
-    public List<Org> fetchByOrg(String org) {
-        return List.of();
+    public List<Person> fetchByOrg(String org) {
+        return mapper.mapList(personRepo.findPersonsByOrgId(org));
     }
 
     @Override
     public List<Person> fetchByRole(String role) {
-        return List.of();
+        return mapper.mapList(personRepo.findPersonByRole(role));
     }
 
     @Override
     public Optional<Person> fetchById(String id) {
-        return mapper.map(repo.findById(id));
+        if (id == null || id.isEmpty()) { return Optional.empty(); }
+        return mapper.map(personRepo.findById(id));
+    }
+
+    @Override
+    public Optional<Org> fetchOrgById(String id) {
+        if(id == null || id.isEmpty()) { return Optional.empty(); }
+        Optional<OrgEntity> orgEntity = orgRepo.findById(id);
+        if (orgEntity.isEmpty()) { return Optional.empty(); }
+        OrgEntity entity = orgEntity.get();
+        Org org = new Org();
+        org.setName(entity.getName());
+        fetchById(entity.getLeaderId()).ifPresent(org::setLeader);
+        org.setMembers(fetchByOrg(id));
+        return Optional.of(org);
+    }
+
+    @Override
+    public Optional<Person> fetchByEmail(String email) {
+        return mapper.map(personRepo.findPersonByEmail(email));
     }
 }

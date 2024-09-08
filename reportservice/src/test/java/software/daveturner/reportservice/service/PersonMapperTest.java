@@ -3,6 +3,7 @@ package software.daveturner.reportservice.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import software.daveturner.model.Person;
+import software.daveturner.reportservice.model.PersonEntity;
 
 import java.time.LocalDate;
 import java.util.Optional;

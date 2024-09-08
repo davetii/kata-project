@@ -16,7 +16,7 @@
     <properties>
         <java.version>22</java.version>
         <cucumber.version>7.18.0</cucumber.version>
-        <app.version>0.0.12</app.version>
+        <app.version>0.0.13</app.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <yaml.path>${project.basedir}</yaml.path>
     </properties>

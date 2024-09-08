@@ -81,7 +81,24 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/org"
+                  $ref: "person.yml#/components/schemas/Person"
+        '404':
+          description: Not Found
+
+  /v1/reports/{orgid}:
+    get:
+      summary: returns a specific org, its leader and its members
+      description: returns a list of people within a specific org
+      operationId: fetchOrg
+      parameters:
+        - $ref: "#/components/parameters/orgPathParam"
+      responses:
+        '200':
+          description: returns list of people with specific level
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/org"
         '404':
           description: Not Found
 
@@ -101,6 +118,22 @@ paths:
                 type: array
                 items:
                   $ref: "person.yml#/components/schemas/Person"
+        '404':
+          description: Not Found
+  /v1/reports/person/{email}:
+    get:
+      summary: returns a Person associated with an email
+      description: returns a Person associated with an email
+      operationId: fetchByEmail
+      parameters:
+        - $ref: "#/components/parameters/emailPathParam"
+      responses:
+        '200':
+          description: returns a Person associated with an email
+          content:
+            application/json:
+              schema:
+                $ref: "person.yml#/components/schemas/Person"
         '404':
           description: Not Found
 components:
@@ -146,16 +179,25 @@ components:
       schema:
         type: string
 
+    emailPathParam:
+      in: path
+      description: email
+      name: email
+      required: true
+      schema:
+        type: string
+
 
   schemas:
     org:
       type: object
       description: Org
       properties:
-        leaders:
-          type: array
-          items:
-            $ref: "person.yml#/components/schemas/Person"
+        name:
+          type: string
+          example: SERVICE
+        leader:
+          $ref: "person.yml#/components/schemas/Person"
         members:
           type: array
           items:
