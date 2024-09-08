@@ -51,17 +51,17 @@ class ReportServiceImplTest {
     }
 
     @Test
-    public void ensureFetchByOrgReturnsExpected() {
-        List<Person> list = service.fetchByOrg("SERVICE");
+    public void ensureFetchOrgMembersReturnsExpected() {
+        List<Person> list = service.fetchOrgMembers("SERVICE");
         assertEquals(list.size(), 1);
         assertEquals(list.get(0).getId(), "abc126");
     }
 
     @Test
-    public void ensureFetchByOrgHandlesNegativeInput() {
-        assertTrue(service.fetchByOrg(null).isEmpty());
-        assertTrue(service.fetchByOrg("").isEmpty());
-        assertTrue(service.fetchByOrg("notfound").isEmpty());
+    public void ensureFetchOrgMembersHandlesNegativeInput() {
+        assertTrue(service.fetchOrgMembers(null).isEmpty());
+        assertTrue(service.fetchOrgMembers("").isEmpty());
+        assertTrue(service.fetchOrgMembers("notfound").isEmpty());
     }
 
     @Test

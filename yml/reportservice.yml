@@ -14,7 +14,7 @@ servers:
     description: Local Server
 
 paths:
-  /v1/reports/person/{id}:
+  /v1/reports/person/id/{id}:
     get:
       summary: returns a person by looking up the ID
       description: returns a person
@@ -30,7 +30,7 @@ paths:
                 $ref: "person.yml#/components/schemas/Person"
         '404':
           description: Not Found
-  /v1/reports/person/{role}:
+  /v1/reports/person/role/{role}:
     get:
       summary: returns a list of people with a specific role
       description: returns a list of people with a specific role
@@ -48,7 +48,7 @@ paths:
                   $ref: "person.yml#/components/schemas/Person"
         '404':
           description: Not Found
-  /v1/reports/person/{level}:
+  /v1/reports/person/level/{level}:
     get:
       summary: returns a list of people with a specific level
       description: returns a list of people with a specific level
@@ -66,11 +66,11 @@ paths:
                   $ref: "person.yml#/components/schemas/Person"
         '404':
           description: Not Found
-  /v1/reports/person/{orgid}:
+  /v1/reports/person/org/{orgid}:
     get:
       summary: returns a list of people within a specific org
       description: returns a list of people within a specific org
-      operationId: fetchByOrg
+      operationId: fetchOrgMembers
       parameters:
         - $ref: "#/components/parameters/orgPathParam"
       responses:
@@ -85,7 +85,7 @@ paths:
         '404':
           description: Not Found
 
-  /v1/reports/{orgid}:
+  /v1/reports/org/{orgid}:
     get:
       summary: returns a specific org, its leader and its members
       description: returns a list of people within a specific org
@@ -102,7 +102,7 @@ paths:
         '404':
           description: Not Found
 
-  /v1/reports/person/{locale}:
+  /v1/reports/person/locale/{locale}:
     get:
       summary: returns a list of people within a specific locale
       description: returns a list of people within a specific locale
@@ -120,7 +120,7 @@ paths:
                   $ref: "person.yml#/components/schemas/Person"
         '404':
           description: Not Found
-  /v1/reports/person/{email}:
+  /v1/reports/person/email/{email}:
     get:
       summary: returns a Person associated with an email
       description: returns a Person associated with an email

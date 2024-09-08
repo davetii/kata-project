@@ -1,0 +1,10 @@
+databaseChangeLog:
+- include:
+      comment: Create audit trigger
+      file: classpath:db/dev/release.1.0.0.sql
+- include:
+    comment: Create table layout for release 1
+    file: classpath:db/dev/release.1.0.1.sql
+- include:
+    comment: Load Kata tables
+    file: classpath:db/dev/release.1.0.1.dataload.sql

@@ -36,7 +36,7 @@ public class ReportServiceImpl implements ReportService{
     }
 
     @Override
-    public List<Person> fetchByOrg(String org) {
+    public List<Person> fetchOrgMembers(String org) {
         return mapper.mapList(personRepo.findPersonsByOrgId(org));
     }
 
@@ -60,7 +60,7 @@ public class ReportServiceImpl implements ReportService{
         Org org = new Org();
         org.setName(entity.getName());
         fetchById(entity.getLeaderId()).ifPresent(org::setLeader);
-        org.setMembers(fetchByOrg(id));
+        org.setMembers(fetchOrgMembers(id));
         return Optional.of(org);
     }
 

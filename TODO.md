@@ -1,7 +1,8 @@
 # Todo
 
 * Report Service
-  * implement postgress in prod
+  * Wire up service to API
+  * create API Tests
   * cucumber tests
 * Create ReportKafkaConsumer
   * Populates postgres tables

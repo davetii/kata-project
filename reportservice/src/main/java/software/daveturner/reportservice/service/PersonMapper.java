@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class PersonMapper {
     public Optional<Person> map(Optional<PersonEntity> entity) {
-        if (entity.isEmpty()) { return Optional.empty(); }
+        if (entity == null || entity.isEmpty()) { return Optional.empty(); }
         Person p = new Person();
         p.setFirstName(entity.get().getFirstName());
         p.setLastName(entity.get().getLastName());

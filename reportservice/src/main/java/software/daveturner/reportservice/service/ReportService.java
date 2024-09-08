@@ -10,7 +10,7 @@ public interface ReportService {
 
     List<Person> fetchByLevel(String level);
     List<Person> fetchByLocale(String locale);
-    List<Person> fetchByOrg(String org);
+    List<Person> fetchOrgMembers(String org);
     List<Person> fetchByRole(String role);
     Optional<Person> fetchById(String id);
     Optional<Person> fetchByEmail(String id);

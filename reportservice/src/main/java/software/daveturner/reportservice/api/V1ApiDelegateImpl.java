@@ -33,8 +33,8 @@ public class V1ApiDelegateImpl implements V1ApiDelegate {
     }
 
     @Override
-    public ResponseEntity<List<Person>> fetchByOrg(String orgid) {
-        return getListResponseEntity(service.fetchByOrg(orgid));
+    public ResponseEntity<List<Person>> fetchOrgMembers(String orgid) {
+        return getListResponseEntity(service.fetchOrgMembers(orgid));
     }
 
     @Override
@@ -49,7 +49,24 @@ public class V1ApiDelegateImpl implements V1ApiDelegate {
 
     @Override
     public ResponseEntity<Person> fetchById(String id) {
-        Optional<Person> p = service.fetchById(id);
-        return p.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return service.fetchById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
+
+    @Override
+    public ResponseEntity<Person> fetchByEmail(String email) {
+        return service.fetchByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @Override
+    public ResponseEntity<Org> fetchOrg(String orgid) {
+        return service.fetchOrgById(orgid)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
