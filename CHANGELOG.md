@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.14] - 2024-08-17
+- Adding API end points for report service
+ 
 ## [0.0.13] - 2024-08-17
 - begin work on report service 
 

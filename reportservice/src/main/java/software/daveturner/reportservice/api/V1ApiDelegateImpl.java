@@ -7,6 +7,7 @@ import software.daveturner.model.Org;
 import software.daveturner.model.Person;
 import software.daveturner.reportservice.service.ReportService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class V1ApiDelegateImpl implements V1ApiDelegate {
     }
 
     private static ResponseEntity<List<Person>> getListResponseEntity(List<Person> persons) {
-        if (persons.isEmpty()) return ResponseEntity.notFound().build();
+        if (persons.isEmpty()) return ResponseEntity.ok(Collections.emptyList());
         return ResponseEntity.ok(persons);
     }
 

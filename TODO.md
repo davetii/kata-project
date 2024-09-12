@@ -1,9 +1,7 @@
 # Todo
 
 * Report Service
-  * Wire up service to API
-  * create API Tests
-  * cucumber tests
+  * cucumber tests for report service
 * Create ReportKafkaConsumer
   * Populates postgres tables
   * implement hist tables postgress

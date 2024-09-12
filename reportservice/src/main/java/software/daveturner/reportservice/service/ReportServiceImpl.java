@@ -8,6 +8,7 @@ import software.daveturner.reportservice.model.OrgEntity;
 import software.daveturner.reportservice.repo.OrgRepo;
 import software.daveturner.reportservice.repo.PersonRepo;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,12 @@ public class ReportServiceImpl implements ReportService{
 
     @Override
     public List<Person> fetchByLevel(String level) {
-        return mapper.mapList(personRepo.findPersonByLevel(Integer.parseInt(level)));
+        try {
+            return mapper.mapList(personRepo.findPersonByLevel(Integer.parseInt(level)));
+        }catch (NumberFormatException nfe) {
+            return Collections.emptyList();
+        }
+
     }
 
     @Override
