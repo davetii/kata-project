@@ -1,6 +1,7 @@
 package software.daveturner.reportservice.api;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.NativeWebRequest;
 import software.daveturner.model.Org;
 import software.daveturner.model.Person;
@@ -9,7 +10,9 @@ import software.daveturner.reportservice.service.ReportService;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
 public class V1ApiDelegateImpl implements V1ApiDelegate {
+
 
     private final ReportService service;
 
